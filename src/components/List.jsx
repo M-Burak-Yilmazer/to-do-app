@@ -67,8 +67,8 @@ const List = ({
               Save
             </button>
             <button
-              className="ms-3 notBtn"
-              style={{ cursor: "pointer" }}
+              className="ms-3 notBtn "
+              style={{ cursor: "pointer", fontSize: "0.5rem" }}
               onClick={() => handleCancelEdit()}
             >
               Cancel
