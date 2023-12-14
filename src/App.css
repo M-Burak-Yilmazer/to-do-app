@@ -9,7 +9,7 @@
 
 .add-input {
   width: 50% !important;
-  height: 40px;
+  height: 50px;
   border: none;
   outline: none;
   border: 2px solid #34c16d;
@@ -32,7 +32,7 @@ h1 {
   background-color: #35d073 !important;
   border: none !important;
   border-radius: 20px 20px 20px 20px;
-  height: 40px;
+  height: 50px;
   color: #2f3337;
   font-weight: 500;
   text-transform: uppercase;
@@ -41,7 +41,7 @@ h1 {
 .alinanbtn,
 .allbtn,
 .notBtn {
-  height: 40px;
+  height: 50px;
   border: none !important;
   color: #2f3337;
   font-weight: 500;
@@ -67,9 +67,10 @@ h1 {
 }
 button {
   font-family: "harry" !important;
+  font-size: 1.2rem !important;
 }
 .editinput {
   background-color: transparent;
-  outline:none;
-  color:white;
+  outline: none;
+  color: white;
 }
