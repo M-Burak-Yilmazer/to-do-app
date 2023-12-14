@@ -11,7 +11,7 @@ const ToDo = () => {
   const [vision, setVision] = useState(list);
   const [editMode, setEditMode] = useState(null);
 
-  //   const [check, setCheck] = useState(true);
+ 
   const handleAdd = (e) => {
     e.preventDefault();
     input.trim() &&
@@ -51,11 +51,11 @@ const ToDo = () => {
 
   const handleEdit = (id) => {
     if (editMode === id) {
-      // İlgili öğe zaten düzenleme modunda, düzenleme modunu kapat
+      
       setEditMode(null);
       setEditData("");
     } else {
-      // Düzenleme moduna geç
+      
       setEditMode(id);
       const itemToEdit = list.find((item) => item.id === id);
       setEditData(itemToEdit.text);
@@ -68,7 +68,7 @@ const ToDo = () => {
         item.id === id ? { ...item, text: editData } : item
       )
     );
-    setEditMode(null); // Düzenleme modunu sıfırla
+    setEditMode(null); 
     setEditData("");
   };
   const handleCancelEdit = () => {
