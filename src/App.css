@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Cute"; /*Can be any text*/
+  src: local("Cute Note"), url("./fonts/Cute\ Notes.ttf") format("truetype");
+}
+@font-face {
+  font-family: "harry"; /*Can be any text*/
+  src: local("HARRYP__"), url("./fonts/HARRYP__.TTF") format("truetype");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.add-input {
+  width: 50% !important;
+  height: 40px;
+  border: none;
+  outline: none;
+  border: 2px solid #34c16d;
+  margin-right: 1rem;
+  border-radius: 20px 20px 20px 20px;
+  padding-left: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: #2a2e31 !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+  margin-top: 2rem !important;
+  color: #34c16d !important;
+  font-family: "Cute";
+  font-size: 3rem !important;
+}
+.addBtn {
+  background-color: #35d073 !important;
+  border: none !important;
+  border-radius: 20px 20px 20px 20px;
+  height: 40px;
+  color: #2f3337;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0 1rem;
+}
+.alinanbtn,
+.allbtn,
+.notBtn {
+  height: 40px;
+  border: none !important;
+  color: #2f3337;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.allbtn {
+  border-radius: 20px 0 0 20px;
+  background-color: #00b4d8;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.alinanbtn {
+  color: #ffbe0b;
+  background-color: #2f3337;
+  border: 2px solid #ffbe0b !important;
+  /* outline:5px solid red; */
+}
+.notBtn {
+  color: #ff006e;
+  background-color: #2f3337;
+  border: 2px solid #ff006e !important;
+  border-radius: 0px 20px 20px 0px;
+}
+button {
+  font-family: "harry" !important;
+}
+.editinput {
+  background-color: transparent;
+  outline:none;
+  color:white;
 }

@@ -1,76 +1,137 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "./List";
 import { v4 } from "uuid";
 import { Form } from "react-bootstrap";
+import { ImGift } from "react-icons/im";
+import image from "../img/20210319-reverse-shopping-list.png";
 const ToDo = () => {
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
+  const [editData, setEditData] = useState(input);
+  const [vision, setVision] = useState(list);
+  const [editMode, setEditMode] = useState(null);
+
   //   const [check, setCheck] = useState(true);
   const handleAdd = (e) => {
     e.preventDefault();
-    setList([...list, { text: input, id: v4(), check: false }]);
+    input.trim() &&
+      setList((prevList) => [
+        ...prevList,
+        { text: input, id: v4(), check: false },
+      ]);
+
     setInput("");
   };
+  useEffect(() => {
+    setVision(list);
+  }, [list]);
+
+  console.log(list);
   const handleCheck = (id) => {
-    setList(
-      list.map((item) =>
-        item.id == id ? { ...item, check: !item.check } : item
+    setList((prevList) =>
+      prevList.map((item) =>
+        item.id === id ? { ...item, check: !item.check } : item
       )
     );
   };
+
+  const handleAll = () => setVision(list);
+  const handleActive = () => {
+    setVision(list.filter((item) => item.check == true));
+    console.log(list);
+  };
+  const handleInActive = () => {
+    setVision(list.filter((item) => item.check == false));
+    console.log(list);
+  };
+
   const handleDelete = (id) => {
     setList(list.filter((item) => item.id != id));
   };
-const handleEdit=(id)=>{
-    
 
-}
+  const handleEdit = (id) => {
+    if (editMode === id) {
+      // İlgili öğe zaten düzenleme modunda, düzenleme modunu kapat
+      setEditMode(null);
+      setEditData("");
+    } else {
+      // Düzenleme moduna geç
+      setEditMode(id);
+      const itemToEdit = list.find((item) => item.id === id);
+      setEditData(itemToEdit.text);
+    }
+  };
 
-  console.log(list);
-
+  const handleSave = (id) => {
+    setList((prevList) =>
+      prevList.map((item) =>
+        item.id === id ? { ...item, text: editData } : item
+      )
+    );
+    setEditMode(null); // Düzenleme modunu sıfırla
+    setEditData("");
+  };
+  const handleCancelEdit = () => {
+    setEditMode(null);
+    setEditData("");
+  };
   return (
-    <div className="text-center ">
-      <h1>Market List</h1>
+    <div className="text-center mt-3 ">
+      <h1>Shopping List</h1>
       <div className="container">
         <Form onSubmit={handleAdd}>
-          <input
-            onChange={(e) => setInput(e.target.value)}
-            className="form-control"
-            type="text"
-            name=""
-            id=""
-            value={input}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary mt-3 mb-3
-        "
-          >
-            Add to list
-          </button>
+          <div className="justify-content-center input-group d-flex align-items-center">
+            <input
+              onChange={(e) => setInput(e.target.value)}
+              className=" add-input"
+              type="text"
+              name=""
+              id=""
+              value={input}
+            />
+            <button type="submit" className="addBtn  mt-3 mb-3  ">
+              Add to list{" "}
+            </button>
+          </div>
           <div className="nav-btns">
-            <button type="button" className="btn btn-success me-2">
+            <button type="button" className="allbtn me-2" onClick={handleAll}>
               All
             </button>
-            <button type="button" className="btn btn-info me-2">
-              Active
+            <button
+              type="button"
+              className="alinanbtn me-2"
+              onClick={handleActive}
+            >
+              purchased
             </button>
-            <button type="button" className="btn btn-danger me-2">
-              Inactive
+            <button
+              type="button"
+              className="notBtn me-2"
+              onClick={handleInActive}
+            >
+              Not purchased
             </button>
           </div>
         </Form>
-        <div>
-          {list.length > 0 &&
-            list.map((item) => (
+        <div className="mt-5 text-center mb-3">
+          {vision?.length < 1 ? (
+            <img src={image} style={{ width: "50%",opacity:"0.5" }} alt="shoplist" />
+          ) : (
+            vision.map((item) => (
               <List
+                editMode={editMode}
+                editData={editData}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
                 handleCheck={handleCheck}
-                key={v4()}
+                key={item.id}
                 item={item}
+                setEditData={setEditData}
+                handleSave={handleSave}
+                handleCancelEdit={handleCancelEdit}
               />
-            ))}
+            ))
+          )}
         </div>
       </div>
     </div>
