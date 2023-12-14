@@ -18,6 +18,13 @@ const ToDo = () => {
       )
     );
   };
+  const handleDelete = (id) => {
+    setList(list.filter((item) => item.id != id));
+  };
+const handleEdit=(id)=>{
+    
+
+}
 
   console.log(list);
 
@@ -56,7 +63,13 @@ const ToDo = () => {
         <div>
           {list.length > 0 &&
             list.map((item) => (
-              <List handleCheck={handleCheck} key={v4()} item={item} />
+              <List
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                handleCheck={handleCheck}
+                key={v4()}
+                item={item}
+              />
             ))}
         </div>
       </div>
