@@ -5,13 +5,15 @@ import { Form } from "react-bootstrap";
 import { ImGift } from "react-icons/im";
 import image from "../img/20210319-reverse-shopping-list.png";
 const ToDo = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(() => {
+    const storedData = localStorage.getItem("userList");
+    return storedData ? JSON.parse(storedData) : [];
+  });
   const [input, setInput] = useState("");
   const [editData, setEditData] = useState(input);
   const [vision, setVision] = useState(list);
   const [editMode, setEditMode] = useState(null);
 
- 
   const handleAdd = (e) => {
     e.preventDefault();
     input.trim() &&
@@ -24,6 +26,11 @@ const ToDo = () => {
   };
   useEffect(() => {
     setVision(list);
+  }, [list]);
+
+  useEffect(() => {
+    // Save data to local storage whenever it changes
+    localStorage.setItem("userList", JSON.stringify(list));
   }, [list]);
 
   console.log(list);
@@ -51,11 +58,9 @@ const ToDo = () => {
 
   const handleEdit = (id) => {
     if (editMode === id) {
-      
       setEditMode(null);
       setEditData("");
     } else {
-      
       setEditMode(id);
       const itemToEdit = list.find((item) => item.id === id);
       setEditData(itemToEdit.text);
@@ -68,7 +73,7 @@ const ToDo = () => {
         item.id === id ? { ...item, text: editData } : item
       )
     );
-    setEditMode(null); 
+    setEditMode(null);
     setEditData("");
   };
   const handleCancelEdit = () => {
@@ -115,7 +120,11 @@ const ToDo = () => {
         </Form>
         <div className="mt-5 text-center mb-3">
           {vision?.length < 1 ? (
-            <img src={image} style={{ width: "50%",opacity:"0.5" }} alt="shoplist" />
+            <img
+              src={image}
+              style={{ width: "50%", opacity: "0.5" }}
+              alt="shoplist"
+            />
           ) : (
             vision.map((item) => (
               <List
